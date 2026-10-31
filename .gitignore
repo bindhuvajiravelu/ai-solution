@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+*.pkl
+.env
+python_programs/
+pytest.ini
