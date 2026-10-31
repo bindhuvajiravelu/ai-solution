@@ -1,14 +1,18 @@
 from fastapi import FastAPI
-from .classifier import Classifier
+from pydantic import BaseModel
+from app.classifier import Classifier
 
-app = FastAPI()
+app = FastAPI(title="AI Support Classifier")
 classifier = Classifier()
 
-@app.get("/")
-def health():
-    return {"status": "ok"}
+class TextIn(BaseModel):
+    text: str
 
-@app.get("/predict")
-def predict(text:str):
-    label = classifier.predict(text)
-    return {"text":text, "label":label}
+@app.get("/")
+def home():
+    return {"message": "AI is running! Go to /docs"}
+
+@app.post("/predict")
+def predict(data: TextIn):
+    label = classifier.classify(data.text)
+    return {"text": data.text, "label": label}
