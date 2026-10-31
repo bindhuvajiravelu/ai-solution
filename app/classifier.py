@@ -1,15 +1,28 @@
-class Classifier:
-    def predict(self, text:str) -> str:
-        text = text.lower().strip()
+import joblib
+import os
 
-        if not text:
-            return "unknown"
-        if "urgent" in text or "asap" in text:
-            return "urgent"
-        elif "bug" in text or "error" in text or "fix" in text:
-            return "bug"
-        elif "feature" in text or "request" in text:
-            return "feature"
+class Classifier:
+    def __init__(self):
+        model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
+        if os.path.exists(model_path):
+            self.model = joblib.load(model_path)
         else:
-            return "general"
+            self.model = None # fallback if model not trained yet
+
+    def clean_text(self, text):
+        return text.lower().strip() if text else ""
+
+    def predict(self, text):
+        cleaned = self.clean_text(text)
+        if not cleaned:
+            return "unknown"
         
+        if self.model:
+            return self.model.predict([cleaned])[0]
+        
+        # fallback to your old rules if model missing
+        if "urgent" in cleaned:
+            return "urgent"
+        if "bug" in cleaned or "error" in cleaned:
+            return "bug"
+        return "unknown"
