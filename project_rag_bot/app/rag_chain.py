@@ -29,9 +29,20 @@ def expand_query(question: str) -> str:
 
 class RAGChain:
     def __init__(self, vector_path="data/vectorstore.pkl"):
-        print(f"Loading vectorstore from: {vector_path}")
-        with open(vector_path, "rb") as f:
-            data = pickle.load(f)
+    import os
+    print(f"Loading vectorstore from: {vector_path}")
+
+    if not os.path.exists(vector_path):
+        print(f"WARNING: {vector_path} not found. Running in empty mode.")
+        self.chunks = []
+        self.vectorizer = None
+        self.vectors = None
+        self.db = None
+        self.vectorstore = None
+        return
+
+    with open(vector_path, "rb") as f:
+        data = pickle.load(f)
 
         if isinstance(data, dict):
             self.chunks = data.get('chunks') or data.get('texts') or data.get('documents')
