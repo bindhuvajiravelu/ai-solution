@@ -1,12 +1,12 @@
 # ai-solution
-To find solution to real-time problems
+
 # 🤖 AI Support Ticket Classifier
 
 > Production-grade NLP system that auto-classifies customer support tickets into Billing, Technical, Account & General categories.
 
 **Live Demo:**
 - 🚀 **API (Swagger UI):** https://ai-support-classifier.onrender.com/docs
-- 🎨 **Gradio UI:** [Add your HuggingFace link after deploy]
+- 🎨 **Gradio UI:** 🚀 Live Demo: https://ai-solution-kve5.onrender.com/
 - 💻 **GitHub:** https://github.com/bindhuvajiravelu/ai-solution
 ---
 
