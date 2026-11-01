@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pytest
+scikit-learn
+joblib
+gradio
+pypdf
+python-dotenv
+openai
